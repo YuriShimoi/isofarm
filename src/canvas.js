@@ -1,5 +1,5 @@
 class Canvas {
-    static RESOLUTION = {width: 1920, height: 1080};
+    static RESOLUTION = {width: 1920, height: 920};
 
     /** Handles canvas related objects and simplifies drawing methods
      * 

@@ -20,7 +20,7 @@ class Canvas {
         this.ctx.clearRect(0, 0, Canvas.RESOLUTION.width, Canvas.RESOLUTION.height);
     }
 
-    /** Drawns the image on canvas at given position
+    /** Draws the image on canvas at given position
      * 
      * @param {string} img_src - Source URL of the image to be draw
      * @param {number} pos_x - Position x at canvas (Default: 0)

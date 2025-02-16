@@ -7,6 +7,7 @@ class GAME {
     static CV_ENTITY = new Canvas();
     static CV_EFFECT = new Canvas();
 
+    static ISO_CANVAS = new Isometric();
 
     /** Load Saves in Memory */
     static load() {
@@ -18,6 +19,16 @@ class GAME {
         this.load();
 
         this.initCanvas();
+
+        Cursor.watch($main);
+        Cursor.onClick = (cinfo) => {
+            console.log('click on', cinfo.x, cinfo.y);
+
+            let tile = GAME.ISO_CANVAS.get(cinfo.x, cinfo.y);
+            if(tile) {
+                console.log(tile.value);
+            }
+        }
     }
     
     //#region [CANVAS]
@@ -29,6 +40,16 @@ class GAME {
         this.CV_BUILDING.instantiate($main);
         this.CV_ENTITY.instantiate($main);
         this.CV_EFFECT.instantiate($main);
+
+        let groundmap = new I3DMap([[[1,2],[3,4]],[[5,6],[7,8]]], 200, 125, 41);
+        ImageLoader.load('img/tile.png').then(() => {
+            groundmap.foreach((v) => {
+                let src = 'img/tile.png';
+                GAME.CV_BACKGROUND.drawImage(src, v.x+400, v.y+200);
+            });
+        });
+
+        GAME.ISO_CANVAS.map(groundmap, 400, 200);
     }
 
     /** Clear and load the canvas visuals

@@ -17,6 +17,7 @@ class Cursor {
 
     static onDrag = (cinfo) => {};
     static onClick = (cinfo) => {};
+    static onMove = (cinfo) => {};
     static onDoubleClick = (cinfo) => {};
     static onMouseEnter = (cinfo) => {};
     static onMouseLeave = (cinfo) => {};
@@ -45,8 +46,10 @@ class Cursor {
             return false;
         });
         element.addEventListener('mousemove', (c) => {
+            let cursor_info = new Cursor.CursorInfo(c.offsetX, c.offsetY, c.button == 0, c.button == 2, c.target);
+            Cursor.onMove(cursor_info);
+
             if(Cursor._prop.active) {
-                let cursor_info = new Cursor.CursorInfo(c.offsetX, c.offsetY, c.button == 0, c.button == 2, c.target);
                 cursor_info.from_x = Cursor._prop.start_x;
                 cursor_info.from_y = Cursor._prop.start_y;
                 Cursor.onDrag(cursor_info);
